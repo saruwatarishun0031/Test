@@ -11,6 +11,7 @@ public class PlayerTest_02 : MonoBehaviour,IInterface//インターフェース�
         CurrentHp -= damage;
         CurrentHp = CurrentHp - damage;
         _HpSlider.value = (float)CurrentHp / (float)maxHp;
+        animator.SetTrigger("Hit");
     }
 
     [SerializeField] private Slider _HpSlider;
@@ -76,9 +77,31 @@ public class PlayerTest_02 : MonoBehaviour,IInterface//インターフェース�
         animator.SetFloat("Walk", _rb.velocity.magnitude);   //歩くアニメーションに切り替える
 
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("Fire1"))
         {
             animator.SetTrigger("Attack");    //マウスクリックで攻撃モーション
+        }
+        if(Input.GetButtonDown("Fire2"))
+        {
+            animator.SetTrigger("Guard");
+        }
+        if(CurrentHp <= 0)
+        {
+            animator.SetBool("Daeth", true);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            IInterface iif = other.gameObject.GetComponent<IInterface>();
+            if (iif != null)
+            {
+
+                Debug.Log("haitta");
+                iif.ReceiveDamage(3);
+            }
         }
     }
 }
