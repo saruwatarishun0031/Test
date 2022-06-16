@@ -8,6 +8,10 @@ public class PlayerTest_02 : MonoBehaviour,IInterface//インターフェース�
     //interfaceで定義したメソッドをすべて定義する必要がある
     public void ReceiveDamage(int damage)//インターフェースで使えるメソッドを定義
     {
+        if(isGuard)
+        {
+            damage = 0;
+        }
         CurrentHp -= damage;
         CurrentHp = CurrentHp - damage;
         _HpSlider.value = (float)CurrentHp / (float)maxHp;
@@ -28,6 +32,9 @@ public class PlayerTest_02 : MonoBehaviour,IInterface//インターフェース�
     private Rigidbody dir;
     [SerializeField]
     int maxHp;
+    [SerializeField] BoxCollider guard;
+    [SerializeField] BoxCollider attack;
+    private bool isGuard;
 
 
 
@@ -84,6 +91,7 @@ public class PlayerTest_02 : MonoBehaviour,IInterface//インターフェース�
         if(Input.GetButtonDown("Fire2"))
         {
             animator.SetTrigger("Guard");
+            isGuard = true;
         }
         if(CurrentHp <= 0)
         {
@@ -91,17 +99,41 @@ public class PlayerTest_02 : MonoBehaviour,IInterface//インターフェース�
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Guard()
     {
-        if (other.gameObject.tag == "Enemy")
-        {
-            IInterface iif = other.gameObject.GetComponent<IInterface>();
-            if (iif != null)
-            {
-
-                Debug.Log("haitta");
-                iif.ReceiveDamage(3);
-            }
-        }
+        guard.enabled = true;
+        Debug.Log("da");
     }
+    private void GuardGuard()
+    {
+        isGuard = false;
+        guard.enabled = false;
+        Debug.Log("bi");
+    }
+
+    private void Attack()
+    {
+        attack.enabled = true;
+        Debug.Log("ta");
+    }
+    private void AttackAttack()
+    {
+        attack.enabled = false;
+        Debug.Log("zi");
+    }
+
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Enemy")
+    //    {
+    //        IInterface iif = other.gameObject.GetComponent<IInterface>();
+    //        if (iif != null)
+    //        {
+
+    //            Debug.Log("haitta");
+    //            iif.ReceiveDamage(3);
+    //        }
+    //    }
+    //}
 }

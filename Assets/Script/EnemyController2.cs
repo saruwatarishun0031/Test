@@ -43,7 +43,7 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
     }
 
 
-   
+
 
     /// <summary>
     /// セットアップ
@@ -70,7 +70,7 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
     bool IsEnemyChase()
     {
         float dis = Vector3.Distance(transform.position, _playerTransform.position);
-       // Debug.Log(dis);
+        // Debug.Log(dis);
 
         if (dis < _chaseDistance && dis > stopingDistansc)
         {
@@ -100,7 +100,7 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
         {
             _rb.velocity = Vector3.zero;
         }
-       
+
     }
 
     void InitEnemy()
@@ -124,7 +124,7 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
             if (!isAttacking)
             {
                 animator.SetBool("Attack", true);
-               // Debug.Log("sss");
+                // Debug.Log("sss");
             }
         }
         else if (diff < _chaseDistance * _chaseDistance)
@@ -149,15 +149,23 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            IInterface iif = other.gameObject.GetComponent<IInterface>();
-            if (iif != null)
-            {
-
-               // Debug.Log("haitta");
-                iif.ReceiveDamage(3);
-            }
-        }
+        //if(other.gameObject.tag == "Guard")
+        //{
+        //    IInterface iif = other.gameObject.GetComponent<IInterface>();
+        //    if (iif != null)
+        //    {
+        //        Debug.Log("ha");
+        //        iif.ReceiveDamage(0);
+        //    }
+        //}
+        //if (other.gameObject.tag == "Player")
+        //{
+        //    IInterface iif = other.gameObject.GetComponent<IInterface>();
+        //    if (iif != null)
+        //    {
+        //        Debug.Log("haitta");
+        //        iif.ReceiveDamage(3);
+        //    }
+        //}
     }
 }

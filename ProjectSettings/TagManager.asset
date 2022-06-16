@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Target
+  - Enemyuepon
+  - Playeruepon
   layers:
   - Default
   - TransparentFX
