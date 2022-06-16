@@ -1,7 +1,8 @@
-﻿using UnityEngine.AI;
+﻿using UnityEngine;
 
-using UnityEngine;
-
+/// <summary>
+/// エネミーのコンポーネント
+/// </summary>
 public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを継承する
 {
     [Tooltip("プレイヤーのポジション"), SerializeField] Transform _playerTransform;
@@ -24,6 +25,7 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     Transform thisTransform;
     Transform defaultTarget;
 
+
     public void ReceiveDamage(int damage)//インターフェースで使えるメソッドを定義
     {
         CurrentHp -= damage;
@@ -31,7 +33,7 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
         // _HpSlider.value = (float)CurrentHp / (float)maxHp;
         animator.SetTrigger("Hit");
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         thisTransform = transform;
@@ -39,6 +41,13 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
         animator = GetComponent<Animator>();
         SetUp();
     }
+
+
+
+
+    /// <summary>
+    /// セットアップ
+    /// </summary>
     void SetUp()
     {
         ///Rigidbodyをつける
@@ -48,14 +57,16 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        EnemyChase();
-        IsEnemyChase();
         Anim();
+        EnemyChase();
     }
 
+    /// <summary>
+    /// エネミーが追いかける範囲内にいるかどうか
+    /// </summary>
+    /// <returns></returns>
     bool IsEnemyChase()
     {
         float dis = Vector3.Distance(transform.position, _playerTransform.position);
@@ -91,6 +102,15 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
         }
 
     }
+
+    void InitEnemy()
+    {
+        //Hp = maxHp;
+    }
+
+
+
+
     void Anim()
     {
         //Debug.Log("walk");
@@ -122,5 +142,30 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
             Destroy(this.gameObject, 1.7f);
         }
 
+    }
+
+
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if(other.gameObject.tag == "Guard")
+        //{
+        //    IInterface iif = other.gameObject.GetComponent<IInterface>();
+        //    if (iif != null)
+        //    {
+        //        Debug.Log("ha");
+        //        iif.ReceiveDamage(0);
+        //    }
+        //}
+        //if (other.gameObject.tag == "Player")
+        //{
+        //    IInterface iif = other.gameObject.GetComponent<IInterface>();
+        //    if (iif != null)
+        //    {
+        //        Debug.Log("haitta");
+        //        iif.ReceiveDamage(3);
+        //    }
+        //}
     }
 }
