@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.AI;
+
 using UnityEngine;
 
 public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを継承する
@@ -51,6 +51,76 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     // Update is called once per frame
     void Update()
     {
-        
+        EnemyChase();
+        IsEnemyChase();
+        Anim();
+    }
+
+    bool IsEnemyChase()
+    {
+        float dis = Vector3.Distance(transform.position, _playerTransform.position);
+        // Debug.Log(dis);
+
+        if (dis < _chaseDistance && dis > stopingDistansc)
+        {
+            return true;
+        }
+        else if (dis < stopingDistansc)
+        {
+            return false;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 追従処理
+    /// </summary>
+    void EnemyChase()
+    {
+        if (IsEnemyChase())
+        {
+            Vector3 vec = new Vector3(_playerTransform.position.x, transform.position.y, _playerTransform.position.z);
+            transform.LookAt(vec);
+
+            _rb.velocity = transform.forward * _speed;
+        }
+        else
+        {
+            _rb.velocity = Vector3.zero;
+        }
+
+    }
+    void Anim()
+    {
+        //Debug.Log("walk");
+        animator.SetBool("walk", true);
+        float diff = (player.position - thisTransform.position).sqrMagnitude;
+        // Debug.Log(diff);
+        // 距離を比較。比較対象も二乗するのを忘れずに
+        if (diff < attackDistance * attackDistance)
+        {
+
+            if (!isAttacking)
+            {
+                animator.SetBool("Attack", true);
+                // Debug.Log("sss");
+            }
+        }
+        else if (diff < _chaseDistance * _chaseDistance)
+        {
+            target = player;
+            animator.SetBool("Attack", false);
+        }
+        else
+        {
+            target = defaultTarget;
+        }
+        if (CurrentHp <= 0)
+        {
+            animator.SetBool("Daeth", true);
+            Destroy(this.gameObject, 1.7f);
+        }
+
     }
 }
