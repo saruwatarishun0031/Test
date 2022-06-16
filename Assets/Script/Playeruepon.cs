@@ -24,7 +24,7 @@ public class Playeruepon : MonoBehaviour
             if (iif != null)
             {
                 Debug.Log("tta");
-                iif.ReceiveDamage(3);
+                iif.ReceiveDamage(5);
             }
         }
     }

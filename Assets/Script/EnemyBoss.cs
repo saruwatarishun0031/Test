@@ -20,6 +20,7 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     [SerializeField]
     int stopingDistansc = 0;
     [SerializeField] private int CurrentHp;
+    [SerializeField] BoxCollider attack;
     bool isAttacking = false;
     Transform player;
     Transform thisTransform;
@@ -142,6 +143,17 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
             Destroy(this.gameObject, 1.7f);
         }
 
+    }
+
+    private void Attack()
+    {
+        attack.enabled = true;
+        Debug.Log("ta");
+    }
+    private void AttackAttack()
+    {
+        attack.enabled = false;
+        Debug.Log("zi");
     }
 
 

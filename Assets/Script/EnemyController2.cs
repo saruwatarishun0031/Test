@@ -20,6 +20,7 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
     [SerializeField]
     int stopingDistansc = 0;
     [SerializeField] private int CurrentHp;
+    [SerializeField] BoxCollider attack;
     bool isAttacking = false;
     Transform player;
     Transform thisTransform;
@@ -142,6 +143,17 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
             Destroy(this.gameObject, 1.7f);
         }
 
+    }
+
+    private void EnemyAttack()
+    {
+        attack.enabled = true;
+        Debug.Log("ta");
+    }
+    private void EnemyAttackAttack()
+    {
+        attack.enabled = false;
+        Debug.Log("zi");
     }
 
 
