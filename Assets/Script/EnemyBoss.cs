@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 /// <summary>
 /// エネミーのコンポーネント
@@ -21,11 +23,16 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     int stopingDistansc = 0;
     [SerializeField] private int CurrentHp;
     [SerializeField] BoxCollider attack;
+    [SerializeField] float timeOut;
     bool isAttacking = false;
     Transform player;
     Transform thisTransform;
     Transform defaultTarget;
-
+    public float speed = 10.0f;
+    public float xRange = 10;
+    public GameObject projectilePrefab;
+    int i = 0;
+    private bool _isAttack = false;
 
     public void ReceiveDamage(int damage)//インターフェースで使えるメソッドを定義
     {
@@ -41,6 +48,17 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
         SetUp();
+        StartCoroutine(Randam());
+    }
+
+    private IEnumerator Randam()
+    {     
+        while (true)
+        {
+            i = UnityEngine.Random.Range(0, 10);
+            yield return new WaitForSeconds(timeOut);
+        }
+        
     }
 
 
@@ -121,17 +139,31 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
         // 距離を比較。比較対象も二乗するのを忘れずに
         if (diff < attackDistance * attackDistance)
         {
-
+            
             if (!isAttacking)
             {
-                animator.SetBool("Attack", true);
-                // Debug.Log("sss");
+                
+                Debug.Log(i);
+                if (i == 1)
+                {
+                    animator.SetTrigger("Attack");
+                }
+                else if (i == 2 || i == 4 || i == 5  || i == 8)
+                {
+                    animator.SetTrigger("touteki");
+                    //Debug.Log("2");
+                }
+                else if (i == 0 || i == 3 || i == 6 || i == 9 || i == 7)
+                {
+                    animator.SetTrigger("kyoukougeki");
+                    //Debug.Log("sss");
+                }
             }
         }
         else if (diff < _chaseDistance * _chaseDistance)
         {
             target = player;
-            animator.SetBool("Attack", false);
+            //animator.SetBool("Attack", false);
         }
         else
         {
@@ -142,11 +174,14 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
             animator.SetBool("Daeth", true);
             Destroy(this.gameObject, 1.7f);
         }
+        return;
+
 
     }
 
     private void Attack()
     {
+        StartCoroutine("Randam");
         attack.enabled = true;
         Debug.Log("ta");
     }
