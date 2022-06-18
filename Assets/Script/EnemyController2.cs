@@ -9,23 +9,17 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
     [Tooltip("追いかける範囲"), SerializeField] float _chaseDistance;
     Rigidbody _rb;
     [Tooltip("エネミーのスピード"), SerializeField] float _speed = 5;
-    [SerializeField]
-    Animator animator = null;
-    [SerializeField, Min(0)]
-    int maxHp = 0;
-    [SerializeField]
-    float attackDistance = 2;
-    [SerializeField]
-    Transform target = null;
-    [SerializeField]
-    int stopingDistansc = 0;
+    [SerializeField]Animator animator = null;
+    [SerializeField, Min(0)]int maxHp = 0;
+    [SerializeField]float attackDistance = 2;
+    [SerializeField]Transform target = null;
+    [SerializeField]int stopingDistansc = 0;
     [SerializeField] private int CurrentHp;
     [SerializeField] BoxCollider attack;
     bool isAttacking = false;
     Transform player;
     Transform thisTransform;
     Transform defaultTarget;
-
 
     public void ReceiveDamage(int damage)//インターフェースで使えるメソッドを定義
     {
@@ -42,9 +36,6 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
         animator = GetComponent<Animator>();
         SetUp();
     }
-
-
-
 
     /// <summary>
     /// セットアップ
@@ -109,9 +100,6 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
         //Hp = maxHp;
     }
 
-
-
-
     void Anim()
     {
         //Debug.Log("walk");
@@ -154,30 +142,5 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
     {
         attack.enabled = false;
         Debug.Log("zi");
-    }
-
-
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //if(other.gameObject.tag == "Guard")
-        //{
-        //    IInterface iif = other.gameObject.GetComponent<IInterface>();
-        //    if (iif != null)
-        //    {
-        //        Debug.Log("ha");
-        //        iif.ReceiveDamage(0);
-        //    }
-        //}
-        //if (other.gameObject.tag == "Player")
-        //{
-        //    IInterface iif = other.gameObject.GetComponent<IInterface>();
-        //    if (iif != null)
-        //    {
-        //        Debug.Log("haitta");
-        //        iif.ReceiveDamage(3);
-        //    }
-        //}
     }
 }

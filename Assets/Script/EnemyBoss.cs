@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Collections;
 
-/// <summary>
-/// エネミーのコンポーネント
-/// </summary>
 public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを継承する
 {
     [Tooltip("プレイヤーのポジション"), SerializeField] Transform _playerTransform;
@@ -13,14 +10,10 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     [Tooltip("エネミーのスピード"), SerializeField] float _speed = 5;
     [SerializeField]
     Animator animator = null;
-    [SerializeField, Min(0)]
-    int maxHp = 0;
-    [SerializeField]
-    float attackDistance = 2;
-    [SerializeField]
-    Transform target = null;
-    [SerializeField]
-    int stopingDistansc = 0;
+    [SerializeField, Min(0)]int maxHp = 0;
+    [SerializeField]float attackDistance = 2;
+    [SerializeField]Transform target = null;
+    [SerializeField]int stopingDistansc = 0;
     [SerializeField] private int CurrentHp;
     [SerializeField] BoxCollider attack;
     [SerializeField] float timeOut;
@@ -32,7 +25,6 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     public float xRange = 10;
     public GameObject projectilePrefab;
     int i = 0;
-    private bool _isAttack = false;
 
     public void ReceiveDamage(int damage)//インターフェースで使えるメソッドを定義
     {
@@ -60,9 +52,6 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
         }
         
     }
-
-
-
 
     /// <summary>
     /// セットアップ
@@ -127,10 +116,7 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
         //Hp = maxHp;
     }
 
-
-
-
-    void Anim()
+   void Anim()
     {
         //Debug.Log("walk");
         animator.SetBool("walk", true);
@@ -175,8 +161,20 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
             Destroy(this.gameObject, 1.7f);
         }
         return;
+    }
 
+    private void touteki()
+    {
+        Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        //Destroy(projectilePrefab, 0.5f);
+    }
 
+    private void istouteki()
+    {
+        //Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        //transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        Destroy(projectilePrefab, 5f);
     }
 
     private void Attack()
@@ -189,30 +187,5 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     {
         attack.enabled = false;
         Debug.Log("zi");
-    }
-
-
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //if(other.gameObject.tag == "Guard")
-        //{
-        //    IInterface iif = other.gameObject.GetComponent<IInterface>();
-        //    if (iif != null)
-        //    {
-        //        Debug.Log("ha");
-        //        iif.ReceiveDamage(0);
-        //    }
-        //}
-        //if (other.gameObject.tag == "Player")
-        //{
-        //    IInterface iif = other.gameObject.GetComponent<IInterface>();
-        //    if (iif != null)
-        //    {
-        //        Debug.Log("haitta");
-        //        iif.ReceiveDamage(3);
-        //    }
-        //}
     }
 }
