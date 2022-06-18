@@ -43,9 +43,6 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
     [SerializeField] Rigidbody rb;
     protected GameObject characterObject;
     protected GameObject attPrefab;
-    public float shot_speed = 1000;
-
-
 
 
     void Start()
@@ -54,8 +51,6 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         _rb = GetComponent<Rigidbody>();
         CurrentHp = maxHp;
         CurrentMP = maxMP;
-        rb = this.GetComponent<Rigidbody>();            // プレハブのRigidbodyを取得
-        forward = characterObject.transform.forward;    // Playerの前方を取得
     }
 
     void Update()
@@ -154,14 +149,8 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
 
     private void Fireball()
     {
-        Instantiate(projectilePrefab, transform.position, transform.rotation);
+        GameObject Spawnobject =  Instantiate(projectilePrefab, transform.position, transform.rotation);
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        rb.velocity = forward * shot_speed;
+        Destroy(Spawnobject, 2f);
     }
-
-    private void isFireball()
-    {
-        DestroyImmediate(projectilePrefab, true );
-    }
-
 }

@@ -17,6 +17,7 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     [SerializeField] private int CurrentHp;
     [SerializeField] BoxCollider attack;
     [SerializeField] float timeOut;
+    [SerializeField] Quaternion _quaternion;
     bool isAttacking = false;
     Transform player;
     Transform thisTransform;
@@ -67,8 +68,6 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
         {
             _rb = gameObject.AddComponent<Rigidbody>();
         }
-        rb = this.GetComponent<Rigidbody>();            // プレハブのRigidbodyを取得
-        forward = characterObject.transform.forward;    // Playerの前方を取得
     }
 
     void Update()
@@ -171,16 +170,9 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
 
     private void touteki()
     {
-        Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        GameObject Spawnobject = Instantiate(projectilePrefab, transform.position, transform.rotation);
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        //Destroy(projectilePrefab, 0.5f);
-    }
-
-    private void istouteki()
-    {
-        //Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
-        //transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        Destroy(projectilePrefab, 5f);
+        Destroy(Spawnobject, 5f);
     }
 
     private void Attack()
