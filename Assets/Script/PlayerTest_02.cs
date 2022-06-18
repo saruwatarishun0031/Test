@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerTest_02 : MonoBehaviour,IInterface//インターフェースを継承する
+public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェースを継承する
 {
     //interfaceで定義したメソッドをすべて定義する必要がある
     public void ReceiveDamage(int damage)//インターフェースで使えるメソッドを定義
     {
-        if(isGuard)
+        if (isGuard)
         {
             damage = 0;
         }
@@ -19,22 +19,31 @@ public class PlayerTest_02 : MonoBehaviour,IInterface//インターフェース�
     }
 
     [SerializeField] private Slider _HpSlider;
-    private int MaxHp;
-    [SerializeField]private int CurrentHp;
-    private float x;
-    private float z;
-    private float y;
-    public float Speed = 1.0f;
-    public float _moveSpeed = 1.0f;
-    float smooth = 10f;
+    [SerializeField] private Slider _MPSlider;
+    [SerializeField] int maxHp;
+    [SerializeField] int maxMP;
+    [SerializeField] BoxCollider guard;
+    [SerializeField] BoxCollider attack;
+    [SerializeField] private int CurrentHp;
+    [SerializeField] private float CurrentMP;
+    [SerializeField] GameObject projectilePrefab;
+    [SerializeField] Quaternion _quaternion;
     private Rigidbody _rb;
     private Animator animator;
     private Rigidbody dir;
-    [SerializeField]
-    int maxHp;
-    [SerializeField] BoxCollider guard;
-    [SerializeField] BoxCollider attack;
+    private float x;
+    private float z;
+    private float y;
     private bool isGuard;
+    public float Speed = 1.0f;
+    public float _moveSpeed = 1.0f;
+    public float speed = 10.0f;
+    float smooth = 10f;
+    protected Vector3 forward;
+    [SerializeField] Rigidbody rb;
+    protected GameObject characterObject;
+    protected GameObject attPrefab;
+    public float shot_speed = 1000;
 
 
 
@@ -44,6 +53,9 @@ public class PlayerTest_02 : MonoBehaviour,IInterface//インターフェース�
         animator = GetComponent<Animator>();   //アニメーションを取得する
         _rb = GetComponent<Rigidbody>();
         CurrentHp = maxHp;
+        CurrentMP = maxMP;
+        rb = this.GetComponent<Rigidbody>();            // プレハブのRigidbodyを取得
+        forward = characterObject.transform.forward;    // Playerの前方を取得
     }
 
     void Update()
@@ -51,6 +63,16 @@ public class PlayerTest_02 : MonoBehaviour,IInterface//インターフェース�
         PlayerInput();
         Move();
         Anim();
+
+        if (CurrentMP > 100)
+        {
+            _MPSlider.value = CurrentMP / (float)maxMP;
+        }
+        else
+        {
+            CurrentMP += Time.deltaTime;
+            _MPSlider.value = CurrentMP / (float)maxMP;
+        }
     }
 
     void PlayerInput()
@@ -88,12 +110,20 @@ public class PlayerTest_02 : MonoBehaviour,IInterface//インターフェース�
         {
             animator.SetTrigger("Attack");    //マウスクリックで攻撃モーション
         }
-        if(Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2"))
         {
             animator.SetTrigger("Guard");
             isGuard = true;
         }
-        if(CurrentHp <= 0)
+        //if (Input.GetKeyDown("KeyCode.Space"))
+        if (Input.GetKeyDown(KeyCode.Space) && CurrentMP >= 20)
+        {
+            Debug.Log("oo");
+            animator.SetTrigger("MP");
+            CurrentMP = CurrentMP - 20;
+            _MPSlider.value = (float)CurrentMP / (float)maxHp;
+        }
+        if (CurrentHp <= 0)
         {
             animator.SetBool("Daeth", true);
         }
@@ -122,18 +152,16 @@ public class PlayerTest_02 : MonoBehaviour,IInterface//インターフェース�
         Debug.Log("zi");
     }
 
+    private void Fireball()
+    {
+        Instantiate(projectilePrefab, transform.position, transform.rotation);
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        rb.velocity = forward * shot_speed;
+    }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Enemy")
-    //    {
-    //        IInterface iif = other.gameObject.GetComponent<IInterface>();
-    //        if (iif != null)
-    //        {
+    private void isFireball()
+    {
+        DestroyImmediate(projectilePrefab, true );
+    }
 
-    //            Debug.Log("haitta");
-    //            iif.ReceiveDamage(3);
-    //        }
-    //    }
-    //}
 }

@@ -25,6 +25,10 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     public float xRange = 10;
     public GameObject projectilePrefab;
     int i = 0;
+    protected Vector3 forward;
+    protected Rigidbody rb;
+    protected GameObject characterObject;
+    private GameObject attPrefab;
 
     public void ReceiveDamage(int damage)//インターフェースで使えるメソッドを定義
     {
@@ -63,6 +67,8 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
         {
             _rb = gameObject.AddComponent<Rigidbody>();
         }
+        rb = this.GetComponent<Rigidbody>();            // プレハブのRigidbodyを取得
+        forward = characterObject.transform.forward;    // Playerの前方を取得
     }
 
     void Update()
