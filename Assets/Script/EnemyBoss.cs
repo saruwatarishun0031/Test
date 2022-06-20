@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
 
 public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを継承する
 {
@@ -18,6 +19,7 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     [SerializeField] BoxCollider attack;
     [SerializeField] float timeOut;
     [SerializeField] Quaternion _quaternion;
+    [SerializeField] private Slider _HpSlider;
     bool isAttacking = false;
     Transform player;
     Transform thisTransform;
@@ -35,7 +37,7 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     {
         CurrentHp -= damage;
         CurrentHp = CurrentHp - damage;
-        // _HpSlider.value = (float)CurrentHp / (float)maxHp;
+        _HpSlider.value = (float)CurrentHp / (float)maxHp;
         animator.SetTrigger("Hit");
     }
 
@@ -172,7 +174,7 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     {
         GameObject Spawnobject = Instantiate(projectilePrefab, transform.position, transform.rotation);
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        Destroy(Spawnobject, 5f);
+        Destroy(Spawnobject, 7f);
     }
 
     private void Attack()

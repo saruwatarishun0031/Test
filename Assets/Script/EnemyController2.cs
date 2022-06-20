@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// エネミーのコンポーネント
@@ -16,6 +17,7 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
     [SerializeField]int stopingDistansc = 0;
     [SerializeField] private int CurrentHp;
     [SerializeField] BoxCollider attack;
+    [SerializeField] private Slider _HpSlider;
     bool isAttacking = false;
     Transform player;
     Transform thisTransform;
@@ -25,7 +27,7 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
     {
         CurrentHp -= damage;
         CurrentHp = CurrentHp - damage;
-        // _HpSlider.value = (float)CurrentHp / (float)maxHp;
+        _HpSlider.value = (float)CurrentHp / (float)maxHp;
         animator.SetTrigger("Hit");
     }
 

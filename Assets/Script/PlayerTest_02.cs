@@ -28,6 +28,9 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
     [SerializeField] private float CurrentMP;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] Quaternion _quaternion;
+    [SerializeField] CapsuleCollider eee;
+    [SerializeField] CapsuleCollider ee;
+    [SerializeField] int XYspeed;
     private Rigidbody _rb;
     private Animator animator;
     private Rigidbody dir;
@@ -55,8 +58,8 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
 
     void Update()
     {
-        PlayerInput();
-        Move();
+        //PlayerInput();
+         
         Anim();
 
         if (CurrentMP > 100)
@@ -68,26 +71,56 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
             CurrentMP += Time.deltaTime;
             _MPSlider.value = CurrentMP / (float)maxMP;
         }
+
+        float mousex = Input.GetAxis("Mouse X");
+        //float mausu y = Input.GetAxis("Mouse Y");
+        transform.RotateAround(transform.position, transform.up, mousex);
     }
 
-    void PlayerInput()
+    //void PlayerInput()
+    //{
+    //    //x, z 平面での移動
+    //    x = Input.GetAxisRaw("Horizontal");
+    //    z = Input.GetAxisRaw("Vertical");
+    //}
+
+    private void FixedUpdate()
     {
-        //x, z 平面での移動
-        x = Input.GetAxisRaw("Horizontal");
-        z = Input.GetAxisRaw("Vertical");
-    }
 
+
+        // 上下左右キーを入力して得た値にspeedをかけた値をAddForceに設定して移動させる
+        //（ForceMode.Impulseは瞬間的に力を加えるということ）
+
+        //direction *= speed * 5;
+        //rb.AddForce(x * speed, 0, z * speed, ForceMode.Impulse);
+
+        //rb.AddForce(direction, ForceMode.Impulse);
+        Move();
+    }
+    
     void Move()
     {
         Vector3 target_dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        _rb.velocity = new Vector3(x, _rb.velocity.y, z) * Speed;         //歩く速度
+        /*_rb.velocity = new Vector3(x, _rb.velocity.y, z) * Speed;         //歩く速度
         //dir.y = 0;
 
         // Y 軸方向の速度を保ちながら、速度ベクトルを求めてセットする
         Vector3 velocity = target_dir.normalized * _moveSpeed;
         velocity.y = _rb.velocity.y;
-        _rb.velocity = velocity;
+        _rb.velocity = velocity;*/
 
+        // 左右のキーの入力を取得
+        float x = Input.GetAxis("Horizontal");
+        // 上下のキーの入力を取得
+        float z = Input.GetAxis("Vertical");
+        Debug.DrawRay(rb.position, rb.transform.forward * 10, Color.red);
+        Vector3 direction = rb.transform.forward * z  + gameObject.transform.right * x;
+        //direction.Normalize();
+        direction *= XYspeed * Time.deltaTime;
+        rb.velocity = direction;
+
+
+        return;//外して
         if (target_dir.magnitude > 0.1)
         {
             //キーを押し方向転換
@@ -127,12 +160,16 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
     private void Guard()
     {
         guard.enabled = true;
+        ee.enabled = false;
+        eee.enabled = false;
         Debug.Log("da");
     }
     private void GuardGuard()
     {
         isGuard = false;
         guard.enabled = false;
+        ee.enabled = true;
+        eee.enabled = true;
         Debug.Log("bi");
     }
 
