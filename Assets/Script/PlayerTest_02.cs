@@ -33,6 +33,7 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
     [SerializeField] int XYspeed;
     [SerializeField] GameObject MPSword;
     [SerializeField] GameObject Sword;
+    [SerializeField] GameObject Go;
     private Rigidbody _rb;
     private Animator animator;
     private Rigidbody dir;
@@ -163,6 +164,7 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         if (CurrentHp <= 0)
         {
             animator.SetBool("Daeth", true);
+            Go.SetActive(true);
         }
     }
 

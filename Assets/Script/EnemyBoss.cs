@@ -20,6 +20,7 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     [SerializeField] float timeOut;
     [SerializeField] Quaternion _quaternion;
     [SerializeField] private Slider _HpSlider;
+    [SerializeField] BoxCollider attack2;
     bool isAttacking = false;
     Transform player;
     Transform thisTransform;
@@ -141,16 +142,20 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
                 {
                     animator.SetTrigger("Attack");
                 }
-                else if (i == 2 || i == 4 || i == 5  || i == 8)
+                else if (i == 2 || i == 4 || i == 6 || i == 8)
                 {
                     animator.SetTrigger("touteki");
                     //Debug.Log("2");
                 }
-                else if (i == 0 || i == 3 || i == 6 || i == 9 || i == 7)
+                else if (i == 0 || i == 3 || i == 5 || i == 7 || i == 9)
                 {
                     animator.SetTrigger("kyoukougeki");
                     //Debug.Log("sss");
                 }
+                //else if (i == 4 || i == 5 || i == 6 || i == 7)
+                //{
+                //    animator.SetTrigger("kaitenn");
+                //}
             }
         }
         else if (diff < _chaseDistance * _chaseDistance)
@@ -187,5 +192,16 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     {
         attack.enabled = false;
         Debug.Log("zi");
+    }
+
+    private void kaiten()
+    {
+        attack.enabled = true;
+        attack2.enabled = true;
+    }
+    private void kaitenn()
+    {
+        attack.enabled = false;
+        attack2.enabled = false;
     }
 }
