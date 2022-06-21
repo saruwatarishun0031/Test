@@ -578,11 +578,11 @@ MonoBehaviour:
   _chaseDistance: 100
   _speed: 20
   animator: {fileID: 0}
-  maxHp: 60
+  maxHp: 200
   attackDistance: 60
   target: {fileID: 0}
-  stopingDistansc: 30
-  CurrentHp: 60
+  stopingDistansc: 20
+  CurrentHp: 200
   attack: {fileID: 1111534188167845834}
   timeOut: 4
   _quaternion: {x: 0, y: 0, z: 0, w: 0}

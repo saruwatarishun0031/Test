@@ -31,6 +31,8 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
     [SerializeField] CapsuleCollider eee;
     [SerializeField] CapsuleCollider ee;
     [SerializeField] int XYspeed;
+    [SerializeField] GameObject MPSword;
+    [SerializeField] GameObject Sword;
     private Rigidbody _rb;
     private Animator animator;
     private Rigidbody dir;
@@ -151,6 +153,13 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
             CurrentMP = CurrentMP - 20;
             _MPSlider.value = (float)CurrentMP / (float)maxHp;
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift) && CurrentMP >= 50)
+        {
+            Debug.Log("ooo");
+            animator.SetTrigger("MPSword");
+            CurrentMP = CurrentMP - 50;
+            _MPSlider.value = (float)CurrentMP / (float)maxHp;
+        }
         if (CurrentHp <= 0)
         {
             animator.SetBool("Daeth", true);
@@ -189,5 +198,16 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         GameObject Spawnobject =  Instantiate(projectilePrefab, transform.position, transform.rotation);
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
         Destroy(Spawnobject, 2f);
+    }
+
+    private void Hissatuwaza()
+    {
+        MPSword.SetActive(true);
+        Sword.SetActive(false);
+    }
+    private void Hissatuwazaout()
+    {
+        MPSword.SetActive(false);
+        Sword.SetActive(true);
     }
 }
