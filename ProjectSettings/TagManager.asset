@@ -8,6 +8,7 @@ TagManager:
   - Target
   - Enemyuepon
   - Playeruepon
+  - kabe
   layers:
   - Default
   - TransparentFX

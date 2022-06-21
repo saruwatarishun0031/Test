@@ -21,6 +21,8 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     [SerializeField] Quaternion _quaternion;
     [SerializeField] private Slider _HpSlider;
     [SerializeField] BoxCollider attack2;
+    [SerializeField] GameObject Go;
+    [SerializeField] GameObject Goo;
     bool isAttacking = false;
     Transform player;
     Transform thisTransform;
@@ -171,6 +173,8 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
         {
             animator.SetBool("Daeth", true);
             Destroy(this.gameObject, 1.7f);
+            Destroy(Go, 1.7f);
+            Destroy(Goo, 1.7f);
         }
         return;
     }

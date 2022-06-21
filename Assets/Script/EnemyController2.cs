@@ -18,6 +18,8 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
     [SerializeField] private int CurrentHp;
     [SerializeField] BoxCollider attack;
     [SerializeField] private Slider _HpSlider;
+
+
     bool isAttacking = false;
     Transform player;
     Transform thisTransform;
