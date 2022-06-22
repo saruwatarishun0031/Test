@@ -282,7 +282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180.01, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.08, y: 4.46}
+  m_AnchoredPosition: {x: 0.08, y: 4.32}
   m_SizeDelta: {x: 160, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1810627656
@@ -607,8 +607,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.7088633, y: 4.189682, z: 2.5749266}
-  m_Center: {x: 0.029453455, y: 1.9674153, z: 0.17520563}
+  m_Size: {x: 4.7088633, y: 3.9414506, z: 2.5749266}
+  m_Center: {x: 0.029453456, y: 0.34308216, z: 0.17520565}
 --- !u!114 &3269045214552187324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,16 +625,18 @@ MonoBehaviour:
   _chaseDistance: 100
   _speed: 20
   animator: {fileID: 0}
-  maxHp: 450
+  maxHp: 1000
   attackDistance: 60
   target: {fileID: 0}
   stopingDistansc: 20
-  CurrentHp: 450
+  CurrentHp: 1000
   attack: {fileID: 648329636}
-  timeOut: 4
+  timeOut: 8
   _quaternion: {x: 0, y: 0, z: 0, w: 0}
   _HpSlider: {fileID: 1810627656}
   attack2: {fileID: 5937879110444650538}
+  Go: {fileID: 0}
+  Goo: {fileID: 0}
   speed: 10
   xRange: 10
   projectilePrefab: {fileID: 2583160675036194859, guid: 3501e29dee940384794f3abb2b7a868e,
@@ -1302,6 +1304,7 @@ GameObject:
   - component: {fileID: 8270621235417867371}
   - component: {fileID: 5937879110444650538}
   - component: {fileID: 8284740528634051733}
+  - component: {fileID: 4170367073548567366}
   m_Layer: 0
   m_Name: Enemyuepon (1)
   m_TagString: Untagged
@@ -1337,6 +1340,18 @@ BoxCollider:
   m_Size: {x: 12.641632, y: 8.859831, z: 9.967454}
   m_Center: {x: -1.6676406, y: -0.25119406, z: -3.696283}
 --- !u!114 &8284740528634051733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6369289972342683446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f521ef3bfa567469bd62d9dc0a84a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4170367073548567366
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -635,16 +635,18 @@ MonoBehaviour:
   _chaseDistance: 100
   _speed: 20
   animator: {fileID: 0}
-  maxHp: 200
+  maxHp: 500
   attackDistance: 60
   target: {fileID: 0}
   stopingDistansc: 20
-  CurrentHp: 200
+  CurrentHp: 500
   attack: {fileID: 1111534188167845834}
   timeOut: 4
   _quaternion: {x: 0, y: 0, z: 0, w: 0}
   _HpSlider: {fileID: 2055456251127792951}
   attack2: {fileID: 4354975349880616740}
+  Go: {fileID: 0}
+  Goo: {fileID: 0}
   speed: 10
   xRange: 10
   projectilePrefab: {fileID: 2583160675036194859, guid: 3501e29dee940384794f3abb2b7a868e,

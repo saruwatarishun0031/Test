@@ -171,27 +171,29 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
     private void Guard()
     {
         guard.enabled = true;
-        ee.enabled = false;
-        eee.enabled = false;
+        //ee.enabled = false;
+        //eee.enabled = false;
         Debug.Log("da");
     }
     private void GuardGuard()
     {
         isGuard = false;
         guard.enabled = false;
-        ee.enabled = true;
-        eee.enabled = true;
+        //ee.enabled = true;
+        //eee.enabled = true;
         Debug.Log("bi");
     }
 
     private void Attack()
     {
         attack.enabled = true;
+        guard.enabled = false;
         Debug.Log("ta");
     }
     private void AttackAttack()
     {
         attack.enabled = false;
+        guard.enabled = false;
         Debug.Log("zi");
     }
 
@@ -199,6 +201,7 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
     {
         GameObject Spawnobject =  Instantiate(projectilePrefab, transform.position, transform.rotation);
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        guard.enabled = false;
         Destroy(Spawnobject, 2f);
     }
 
@@ -206,10 +209,12 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
     {
         MPSword.SetActive(true);
         Sword.SetActive(false);
+        guard.enabled = false;
     }
     private void Hissatuwazaout()
     {
         MPSword.SetActive(false);
         Sword.SetActive(true);
+        guard.enabled = false;
     }
 }

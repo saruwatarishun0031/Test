@@ -144,20 +144,20 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
                 {
                     animator.SetTrigger("Attack");
                 }
-                else if (i == 2 || i == 4 || i == 6 || i == 8)
+                else if (i == 2 || i == 8)
                 {
                     animator.SetTrigger("touteki");
                     //Debug.Log("2");
                 }
-                else if (i == 0 || i == 3 || i == 5 || i == 7 || i == 9)
+                else if (i == 0 || i == 3 || i == 9)
                 {
                     animator.SetTrigger("kyoukougeki");
                     //Debug.Log("sss");
                 }
-                //else if (i == 4 || i == 5 || i == 6 || i == 7)
-                //{
-                //    animator.SetTrigger("kaitenn");
-                //}
+                else if (i == 4 || i == 5 || i == 6 || i == 7)
+                {
+                    animator.SetTrigger("kaitenn");
+                }
             }
         }
         else if (diff < _chaseDistance * _chaseDistance)
