@@ -173,6 +173,8 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         guard.enabled = true;
         //ee.enabled = false;
         //eee.enabled = false;
+        MPSword.SetActive(false);
+        Sword.SetActive(true);
         Debug.Log("da");
     }
     private void GuardGuard()
@@ -181,6 +183,8 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         guard.enabled = false;
         //ee.enabled = true;
         //eee.enabled = true;
+        MPSword.SetActive(false);
+        Sword.SetActive(true);
         Debug.Log("bi");
     }
 
@@ -188,12 +192,16 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
     {
         attack.enabled = true;
         guard.enabled = false;
+        MPSword.SetActive(false);
+        Sword.SetActive(true);
         Debug.Log("ta");
     }
     private void AttackAttack()
     {
         attack.enabled = false;
         guard.enabled = false;
+        MPSword.SetActive(false);
+        Sword.SetActive(true);
         Debug.Log("zi");
     }
 
@@ -202,6 +210,8 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         GameObject Spawnobject =  Instantiate(projectilePrefab, transform.position, transform.rotation);
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
         guard.enabled = false;
+        MPSword.SetActive(false);
+        Sword.SetActive(true);
         Destroy(Spawnobject, 2f);
     }
 
