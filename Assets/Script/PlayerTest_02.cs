@@ -137,6 +137,14 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         animator.SetFloat("Walk", _rb.velocity.magnitude);   //歩くアニメーションに切り替える
 
 
+        if(Input.GetButton("W") && Input.GetButton("D"))
+        {
+            animator.SetBool("Ran",true);
+        }
+        if (Input.GetButton("") && Input.GetButton(""))
+        {
+            animator.SetBool("Ran", true);
+        }
         if (Input.GetButtonDown("Fire1"))
         {
             animator.SetTrigger("Attack");    //マウスクリックで攻撃モーション
