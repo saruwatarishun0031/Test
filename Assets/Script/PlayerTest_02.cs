@@ -137,7 +137,7 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         animator.SetFloat("Walk", _rb.velocity.magnitude);   //歩くアニメーションに切り替える
 
 
-        //if(Input.GetButton("W") && Input.GetButton("D"))
+        //if(Input.GetButton("W") && Input.GetButton("D"))s
         //{
         //    Debug.Log("ttt");
         //    animator.SetBool("Ran",true);
