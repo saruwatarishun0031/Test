@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,6 +37,12 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
     [SerializeField] GameObject Go;
     private Rigidbody _rb;
     private Animator animator;
+
+    public void GetItem(Item item)
+    {
+        _itemList.Add(item);
+    }
+
     private Rigidbody dir;
     private float x;
     private float z;
@@ -50,6 +57,8 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
     protected GameObject characterObject;
     protected GameObject attPrefab;
 
+    List<Item> _itemList = new List<Item>();
+
 
     void Start()
     {
@@ -57,6 +66,8 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         _rb = GetComponent<Rigidbody>();
         CurrentHp = maxHp;
         CurrentMP = maxMP;
+        AddHP(0);
+        AddMP(0);
     }
 
     void Update()
@@ -78,6 +89,20 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         float mousex = Input.GetAxis("Mouse X");
         //float mausu y = Input.GetAxis("Mouse Y");
         transform.RotateAround(transform.position, transform.up, mousex);
+
+
+        // アイテムを使う
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (_itemList.Count > 0)
+            {
+                // リストの先頭にあるアイテムを使って、破棄する
+                Item item = _itemList[0];
+                _itemList.RemoveAt(0);
+                item.Activate();
+                Destroy(item.gameObject);
+            }
+        }
     }
 
     //void PlayerInput()
@@ -236,5 +261,15 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         MPSword.SetActive(false);
         Sword.SetActive(true);
         guard.enabled = false;
+    }
+
+    internal void AddHP(int HP)
+    {
+        CurrentHp += HP;
+    }
+
+    internal void AddMP(float MP)
+    {
+        CurrentMP += MP;
     }
 }
