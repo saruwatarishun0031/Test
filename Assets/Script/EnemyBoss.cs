@@ -176,6 +176,7 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
         if (CurrentHp <= 0)
         {
             animator.SetBool("Daeth", true);
+            gameObject.GetComponent<IAddScore>()?.AddScore(3000);
             Destroy(this.gameObject, 1.7f);
             Destroy(Go, 1.7f);
             Destroy(Goo, 1.7f);

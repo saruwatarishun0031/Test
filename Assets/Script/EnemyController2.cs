@@ -132,6 +132,7 @@ public class EnemyController2 : MonoBehaviour, IInterface//インターフェー
         if (CurrentHp <= 0)
         {
             animator.SetBool("Daeth", true);
+            gameObject.GetComponent<IAddScore>()?.AddScore(1000);
             Destroy(this.gameObject, 1.7f);
         }
 

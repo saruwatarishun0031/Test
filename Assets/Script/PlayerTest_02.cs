@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +16,16 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         }
         CurrentHp -= damage;
         CurrentHp = CurrentHp - damage;
-        _HpSlider.value = (float)CurrentHp / (float)maxHp;
+        //_HpSlider.value = (float)CurrentHp / (float)maxHp;
+
+        // DOTween.To() を使って連続的に変化させる
+        DOTween.To(() => _HpSlider.value, // 連続的に変化させる対象の値
+            x => _HpSlider.value = x, // 変化させた値 x をどう処理するかを書く
+            (float)CurrentHp / (float)maxHp, // x をどの値まで変化させるか指示する
+            3f);   // 何秒かけて変化させるか指示する
+
         animator.SetTrigger("Hit");
+
     }
 
     [SerializeField] private Slider _HpSlider;
@@ -187,14 +196,24 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
             Debug.Log("oo");
             animator.SetTrigger("MP");
             CurrentMP = CurrentMP - 20;
-            _MPSlider.value = (float)CurrentMP / (float)maxHp;
+            //_MPSlider.value = (float)CurrentMP / (float)maxHp;
+            // DOTween.To() を使って連続的に変化させる
+            DOTween.To(() => _MPSlider.value, // 連続的に変化させる対象の値
+                x => _MPSlider.value = x, // 変化させた値 x をどう処理するかを書く
+                (float)CurrentMP / (float)maxHp, // x をどの値まで変化させるか指示する
+                3f);   // 何秒かけて変化させるか指示する
         }
         if (Input.GetKeyDown(KeyCode.LeftShift) && CurrentMP >= 50)
         {
             Debug.Log("ooo");
             animator.SetTrigger("MPSword");
             CurrentMP = CurrentMP - 50;
-            _MPSlider.value = (float)CurrentMP / (float)maxHp;
+            //_MPSlider.value = (float)CurrentMP / (float)maxHp;
+            // DOTween.To() を使って連続的に変化させる
+            DOTween.To(() => _MPSlider.value, // 連続的に変化させる対象の値
+                x => _MPSlider.value = x, // 変化させた値 x をどう処理するかを書く
+                (float)CurrentMP / (float)maxHp, // x をどの値まで変化させるか指示する
+                3f);   // 何秒かけて変化させるか指示する
         }
         if (CurrentHp <= 0)
         {

@@ -20,12 +20,8 @@ public class Playeruepon1 : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             Debug.Log("a");
-            IInterface iif = other.gameObject.GetComponent<IInterface>();
-            if (iif != null)
-            {
-                Debug.Log("tta");
-                iif.ReceiveDamage(20);
-            }
+            other.gameObject.GetComponent<IInterface>()?.ReceiveDamage(20);
+            
         }
     }
 
