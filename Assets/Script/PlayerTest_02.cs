@@ -231,7 +231,7 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         Sword.SetActive(true);
         Debug.Log("ta");
     }
-    private void AttackAttack()
+    private void AttackAttack() 
     {
         attack.enabled = false;
         guard.enabled = false;

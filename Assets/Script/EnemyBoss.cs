@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
+using System.Linq;
+using System;
+using Random = UnityEngine.Random;
 
 public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを継承する
 {
@@ -57,8 +60,9 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     {     
         while (true)
         {
-            i = UnityEngine.Random.Range(0, 10);
+            i = Random.Range(0, 10);
             yield return new WaitForSeconds(timeOut);
+
         }
         
     }
@@ -207,5 +211,10 @@ public class EnemyBoss : MonoBehaviour, IInterface//インターフェースを�
     {
         attack.enabled = false;
         attack2.enabled = false;
+    }
+    static void Main(string[] args)
+    {
+        string[] stringArray = { "tuiseki", "kougeki", "touteki", "dennzyarasu",  };
+        stringArray.Where(i => i.Length > 11).ToList().ForEach(i => Console.WriteLine(i));
     }
 }
