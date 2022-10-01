@@ -16,7 +16,7 @@ public class PlayerTest_02 : MonoBehaviour, IInterface//インターフェース
         }
         CurrentHp -= damage;
         CurrentHp = CurrentHp - damage;
-        //_HpSlider.value = (float)CurrentHp / (float)maxHp;
+        //_HpSlider.= (float)CurrentHp / (float)maxHp;
 
         // DOTween.To() を使って連続的に変化させる
         DOTween.To(() => _HpSlider.value, // 連続的に変化させる対象の値
